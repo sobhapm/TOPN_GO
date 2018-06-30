@@ -17,22 +17,11 @@ if end >= start{
 		return mid
 	}
 	if array[mid] > num {
-		//if mid-1 >= start {
 		return b_search(array,num, start, mid-1)
-		//}
 	} else {
-		//if mid+1 <= end {
 		return b_search(array,num, mid+1, end)
-		//}
 	}
 }
-/*
-if mid > end {
-	mid = end
-} else if mid < start {
-	mid = start
-}
-*/
 return mid
 }
 
@@ -75,10 +64,6 @@ func main(){
 file_name := flag.String("input", "", "Input filename (Compulsory)")
 top_N := flag.Int("N",5,"The count of highest numbers (Optional)")
 
-/*
-var svar string
-flag.StringVar(&svar, "svar", "bar", "a string var")
-*/
 flag.Parse()
 
 if *file_name == "" || *top_N == -1{
@@ -87,9 +72,6 @@ if *file_name == "" || *top_N == -1{
 }
 
 N := *top_N;
-
-//fmt.Println("File name", *file_name)
-//fmt.Println("N ", N)
 
 //top to hold N numbers
 top :=  make([]int,N)
@@ -101,39 +83,18 @@ if err != nil {
 defer inpFile.Close()
 scanner := bufio.NewScanner(inpFile)
 
-//fmt.Println("len(top) ", len(top))
-
 fill := 0
 numLines := 0
 var num int
 last_pos := 0
 for scanner.Scan() {
-	//fmt.Println(scanner.Text())
-	//num,_ = strconv.ParseInt(scanner.Text(), 10, 32)
 	num,_ = strconv.Atoi(scanner.Text())
-	//fmt.Println(num)
 
 	numLines++
 	if numLines <= N {
 		pos := 0
 		if numLines > 1 {
 			pos = b_search(top,num,0, fill - 1)
-		//	pos = b_search(top,num,0, fill)
-				//fmt.Println("fill = " , fill)
-				//fmt.Println("pos = " , pos)
-				//fmt.Println("numl = " , numLines)
-/*
-			if pos > N-1 {
-				fmt.Println("Oh yes");
-				//fmt.Println(top[N-1], num)
-				pos = N-1
-			}
-
-			if pos < 0 {
-				fmt.Println("Oh yes 2");
-				pos = 0
-			}
-*/
 			if top[pos] == num {
 				continue;
 			}
